@@ -24,7 +24,7 @@ const Users = DB.define('users',{
     },
     category: {
         type: Sequelize.ENUM,
-        values: ['veg', 'non-veg'],
+        values: ['veg', 'non-veg', 'both'],
         defaultValue: 'veg',
         allowNull: false
     },
@@ -33,6 +33,10 @@ const Users = DB.define('users',{
         values: ['customer', 'restaurant'],
         defaultValue: 'customer',
         allowNull: false
+    },
+    address:{
+        type: Sequelize.TEXT,
+        allowNull: true
     }
 }, { timestamps: false });
 

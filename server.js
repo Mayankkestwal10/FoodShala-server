@@ -1,11 +1,24 @@
 const express = require('express');
 const app = express();
 const DB = require('./config/db');
+const fileUpload = require('express-fileupload');
+const logger = require("./utils/logger");
+
 const userRoutes = require("./routes/userRoutes");
+
 require('dotenv').config();
 
+app.use(express.json());
+app.use(express.urlencoded({
+  extended: true
+}));
+
+app.use(fileUpload())
+app.use(express.static("./public"))
+
+
 //Routes
-app.use('/', userRoutes);
+app.use('/auth', userRoutes);
 
 DB
     .sync()

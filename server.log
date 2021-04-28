@@ -1,0 +1,13 @@
+[2021-04-27T15:17:51.326Z] - [error] - { userController.js | signup | Error: User already Exists! };
+[2021-04-27T15:18:14.696Z] - [error] - { userController.js | signup | Error: User already Exists! };
+[2021-04-27T16:41:20.166Z] - [error] - { userController.js | signup | Error: User already Exists! };
+[2021-04-27T16:41:24.747Z] - [error] - { userController.js | signup | Error: User already Exists! };
+[2021-04-27T16:42:19.855Z] - [error] - { userController.js | signup | Error: User already Exists! };
+[2021-04-27T16:44:20.405Z] - [error] - { userController.js | signup | Error: User already Exists! };
+[2021-04-27T17:04:13.198Z] - [error] - { userController.js | signup | ReferenceError: Cannot access 'role' before initialization };
+[2021-04-27T17:04:52.591Z] - [error] - { userController.js | signup | Error: User already Exists! };
+[2021-04-27T17:06:22.544Z] - [error] - { userController.js | signup | Error: User already Exists! };
+[2021-04-27T17:06:41.838Z] - [error] - { userController.js | signup | Error: name should be at least 3 characters };
+[2021-04-27T17:31:22.565Z] - [error] - { userController.js | signup | Error: enter address };
+[2021-04-27T17:31:47.850Z] - [error] - { userController.js | signup | SequelizeDatabaseError: Data truncated for column 'category' at row 1 };
+[2021-04-27T17:35:16.149Z] - [error] - { userController.js | restaurantSignup | SequelizeDatabaseError: Data truncated for column 'category' at row 1 };
