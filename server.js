@@ -3,7 +3,7 @@ const app = express();
 const DB = require('./config/db');
 const fileUpload = require('express-fileupload');
 const logger = require("./utils/logger");
-
+const cors = require('cors');
 const userRoutes = require("./routes/userRoutes");
 
 require('dotenv').config();
@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({
   extended: true
 }));
-
+app.use(cors());
 app.use(fileUpload())
 app.use(express.static("./public"))
 

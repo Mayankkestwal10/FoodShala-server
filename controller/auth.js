@@ -4,6 +4,7 @@ const logger = require("../utils/logger");
 var jwt = require("jsonwebtoken");
 var expressJwt = require("express-jwt");
 const { validationResult } = require("express-validator");
+require('dotenv').config();
 
 exports.userSignup = async (req, res, next) => {
     try {
@@ -18,9 +19,9 @@ exports.userSignup = async (req, res, next) => {
         const name = req.body.name;
         const email = req.body.email;
         const password = req.body.password;
-        const category = req.body.category;
+        // const category = req.body.category;
         const role = 'customer';
-        const mobile = req.body.mobile;
+        // const mobile = req.body.mobile;
 
         const user = await User.findAll({ where: { email: email } });
 
@@ -33,17 +34,28 @@ exports.userSignup = async (req, res, next) => {
                 name: name,
                 email: email,
                 password: hashedPassword,
-                category: category,
+                // category: category,
                 role: role,
-                mobile: mobile
+                // mobile: mobile
             });
 
             if (newUser) {
-                return res
-                    .status(201)
-                    .json({
-                        status: 'Success!'
-                    });
+
+                console.log(newUser.id);
+
+                const token = jwt.sign({ id: newUser.id }, process.env.SECRET);
+
+                //put token in cookie
+                res.cookie("token", token, { expiresIn: '1h' });
+
+                const userObj = {
+                    id: newUser.id,
+                    category: newUser.category,
+                    role: newUser.role
+                }
+
+                return res.json({ token, user:userObj });
+
             } else {
                 throw new Error("User cannot be created!");
             }
@@ -115,6 +127,7 @@ exports.restaurantSignup = async (req, res, next) => {
 }
 
 exports.login = async (req, res, next) => {
+
     try {
         const email = req.body.email;
         const password = req.body.password;
@@ -132,16 +145,21 @@ exports.login = async (req, res, next) => {
                 //put token in cookie
                 res.cookie("token", token, { expiresIn: '1h' });
 
-                //send response to front end
-                const { _id, name, email, role } = user;
-                return res.json({ token, user: { _id, name, email, role } });
+                const userObj = {
+                    id: user[0].id,
+                    category: user[0].category,
+                    role: user[0].role
+                }
+
+                return res.json({ token, user:userObj });
 
             } else {
                 throw new Error('Invalid Credentials!');
             }
         }
     } catch (err) {
-        return res.status(200).json({
+        logger.log("error", `userController.js | login | ${err}`);
+        return res.status(400).json({
             status: err.message
         });
     }
@@ -150,7 +168,8 @@ exports.login = async (req, res, next) => {
 //protected routes
 exports.isSignedIn = expressJwt({
     secret: process.env.SECRET,
-    userProperty: "auth"
+    userProperty: "auth",
+    algorithms: ['RS256']
 });
 
 //custom middlewares
