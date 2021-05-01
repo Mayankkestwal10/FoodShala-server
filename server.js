@@ -5,6 +5,9 @@ const fileUpload = require('express-fileupload');
 const logger = require("./utils/logger");
 const cors = require('cors');
 const userRoutes = require("./routes/userRoutes");
+const restaurantRoutes = require("./routes/restaurantRoutes");
+const itemRoutes = require("./routes/itemRoutes");
+const orderRoutes = require("./routes/orderRoutes");
 
 require('dotenv').config();
 
@@ -19,7 +22,9 @@ app.use(express.static("./public"))
 
 //Routes
 app.use('/auth', userRoutes);
-
+app.use('/rest', restaurantRoutes);
+app.use('/food', itemRoutes);
+app.use('/order', orderRoutes);
 DB
     .sync()
     .then(result => {
@@ -28,6 +33,7 @@ DB
     .catch(err => {
         console.log(err);
 });
+
 
 const port = process.env.PORT || 8000;
 

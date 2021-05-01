@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const { userSignup, restaurantSignup, login } = require("../controller/auth");
+const { userSignup, restaurantSignup, login, signout } = require("../controller/auth");
 const {check} = require('express-validator');
 const { getUsername, updateDetails } = require("../controller/user");
 
@@ -36,6 +36,9 @@ router.post('/login',
     check("password", "password should be at least 8 characters").isLength({ min: 8 })
 ],
 login);
+
+router.get('/logout',
+signout);
 
 router.post('/username', getUsername);
 

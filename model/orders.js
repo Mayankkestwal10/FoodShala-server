@@ -1,8 +1,7 @@
 const Sequelize = require('sequelize');
 
 const DB = require('../config/db');
-const Items = require('./item');
-const Users = require('./users');
+
 
 const Orders = DB.define('orders', {
     id: {
@@ -30,6 +29,22 @@ const Orders = DB.define('orders', {
     customerName: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    restaurantName:{
+        type: Sequelize.STRING,
+        allowNull:false
+    },
+    restaurantMobile: {
+        type: Sequelize.STRING,
+        allowNull:false
+    },
+    customerAddress:{
+        type: Sequelize.STRING,
+        allowNull:false
+    },
+    customerMobile:{
+        type: Sequelize.STRING,
+        allowNull:false
     }
 }, { timestamps: false });
 

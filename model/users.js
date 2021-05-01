@@ -37,6 +37,14 @@ const Users = DB.define('users',{
     address:{
         type: Sequelize.TEXT,
         allowNull: true
+    },
+    mobile:{
+        type: Sequelize.STRING,
+        allowNull:true
+    },
+    image:{
+        type: Sequelize.STRING,
+        allowNull:true
     }
 }, { timestamps: false });
 

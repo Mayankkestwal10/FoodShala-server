@@ -32,3 +32,40 @@
 [2021-04-29T16:07:40.916Z] - [error] - { userController.js | userSignup | TypeError: Cannot read property 'id' of undefined };
 [2021-04-29T16:10:13.795Z] - [error] - { userController.js | userSignup | TypeError: Cannot read property 'id' of undefined };
 [2021-04-29T16:13:35.210Z] - [error] - { userController.js | userSignup | Error: email is required };
+[2021-04-30T05:15:05.822Z] - [error] - { restaurant.js | getRestaurantByCategory | Error: Invalid value { '$or': [ 'veg', 'both' ] } };
+[2021-04-30T05:18:24.508Z] - [error] - { restaurant.js | getRestaurantByCategory | Error: Invalid value { '$or': [ { category: 'veg' }, { category: 'both' } ] } };
+[2021-04-30T05:19:25.489Z] - [error] - { restaurant.js | getRestaurantByCategory | Error: Invalid value {
+  '$or': [ { category: { '$eq': 'veg' } }, { category: { '$eq': 'both' } } ]
+} };
+[2021-04-30T05:20:25.808Z] - [error] - { restaurant.js | getRestaurantByCategory | Error: Invalid value { category: { '$eq': 'veg' } } };
+[2021-04-30T05:25:12.922Z] - [error] - { restaurant.js | getRestaurantByCategory | ReferenceError: Sequelize is not defined };
+[2021-04-30T05:26:00.987Z] - [error] - { restaurant.js | getRestaurantByCategory | Error: Invalid value { category: 'veg' } };
+[2021-04-30T10:55:22.006Z] - [error] - { item.js | addItem | ReferenceError: uuid is not defined };
+[2021-04-30T10:55:34.147Z] - [error] - { item.js | addItem | ReferenceError: uuid is not defined };
+[2021-04-30T13:03:45.914Z] - [error] - { user.js | restaurantSignup | ReferenceError: uuid is not defined };
+[2021-04-30T15:27:47.619Z] - [error] - { user.js | login | Error: Invalid Credentials! };
+[2021-04-30T15:29:31.723Z] - [error] - { user.js | userSignup | SequelizeDatabaseError: Field 'image' doesn't have a default value };
+[2021-04-30T15:45:16.383Z] - [error] - { user.js | login | Error: Invalid Credentials! };
+[2021-04-30T16:32:04.049Z] - [error] - { restaurant.js | getRestaurantByCategory | Error: WHERE parameter "category" has invalid "undefined" value };
+[2021-04-30T16:32:18.682Z] - [error] - { restaurant.js | getRestaurantByCategory | Error: WHERE parameter "category" has invalid "undefined" value };
+[2021-04-30T16:32:32.365Z] - [error] - { restaurant.js | getRestaurantByCategory | Error: WHERE parameter "category" has invalid "undefined" value };
+[2021-04-30T16:32:42.916Z] - [error] - { restaurant.js | getRestaurantByCategory | Error: WHERE parameter "category" has invalid "undefined" value };
+[2021-04-30T18:21:16.103Z] - [error] - { restaurant.js | getHomeRestaurantId | ReferenceError: restaurant is not defined };
+[2021-04-30T18:21:21.780Z] - [error] - { restaurant.js | getHomeRestaurantId | ReferenceError: restaurant is not defined };
+[2021-04-30T18:21:37.828Z] - [error] - { restaurant.js | getHomeRestaurantId | ReferenceError: restaurant is not defined };
+[2021-05-01T04:49:07.633Z] - [error] - { item.js | getListItems | Error: WHERE parameter "restaurantId" has invalid "undefined" value };
+[2021-05-01T06:27:08.071Z] - [error] - { item.js | deleteItem | TypeError: Items.delete is not a function };
+[2021-05-01T06:27:21.762Z] - [error] - { item.js | deleteItem | TypeError: Items.delete is not a function };
+[2021-05-01T08:49:46.338Z] - [error] - { order.js | addOrder | SequelizeDatabaseError: Out of range value for column 'restaurantMobile' at row 1 };
+[2021-05-01T09:06:26.346Z] - [error] - { user.js | userSignup | Error: User already Exists! };
+[2021-05-01T09:31:20.315Z] - [error] - { order.js | addOrder | SequelizeValidationError: notNull Violation: orders.customerAddress cannot be null,
+notNull Violation: orders.customerMobile cannot be null };
+[2021-05-01T09:31:30.235Z] - [error] - { order.js | addOrder | SequelizeValidationError: notNull Violation: orders.customerAddress cannot be null,
+notNull Violation: orders.customerMobile cannot be null };
+[2021-05-01T09:31:41.566Z] - [error] - { order.js | addOrder | SequelizeValidationError: notNull Violation: orders.customerAddress cannot be null,
+notNull Violation: orders.customerMobile cannot be null };
+[2021-05-01T09:49:52.710Z] - [error] - { order.js | addOrder | SequelizeValidationError: notNull Violation: orders.customerAddress cannot be null,
+notNull Violation: orders.customerMobile cannot be null };
+[2021-05-01T09:53:39.034Z] - [error] - { user.js | login | Error: Invalid Credentials! };
+[2021-05-01T09:53:47.339Z] - [error] - { user.js | login | Error: Invalid Credentials! };
+[2021-05-01T09:54:43.837Z] - [error] - { user.js | login | Error: Invalid Credentials! };

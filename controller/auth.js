@@ -5,6 +5,7 @@ var jwt = require("jsonwebtoken");
 var expressJwt = require("express-jwt");
 const { validationResult } = require("express-validator");
 require('dotenv').config();
+const uuid = require('uuid');
 
 exports.userSignup = async (req, res, next) => {
     try {
@@ -51,10 +52,13 @@ exports.userSignup = async (req, res, next) => {
                 const userObj = {
                     id: newUser.id,
                     category: newUser.category,
-                    role: newUser.role
+                    role: newUser.role,
+                    name: newUser.name,
+                    add: newUser.address,
+                    mobile: newUser.mobile
                 }
 
-                return res.json({ token, user:userObj });
+                return res.json({ token, user: userObj });
 
             } else {
                 throw new Error("User cannot be created!");
@@ -62,7 +66,7 @@ exports.userSignup = async (req, res, next) => {
         }
     } catch (err) {
 
-        logger.log("error", `userController.js | userSignup | ${err}`);
+        logger.log("error", `user.js | userSignup | ${err}`);
 
         return res.status(400).json({
             status: err.message
@@ -88,37 +92,59 @@ exports.restaurantSignup = async (req, res, next) => {
         const address = req.body.address;
         const mobile = req.body.mobile;
 
-
         const user = await User.findAll({ where: { email: email } });
 
         if (user[0]) {
             throw new Error("User already Exists!");
         } else {
-            const hashedPassword = await bcrypt.hash(password, 12);
-            const newUser = await User.create({
-                id: '',
-                name: name,
-                email: email,
-                password: hashedPassword,
-                category: category,
-                role: role,
-                address: address,
-                mobile: mobile
-            });
 
-            if (newUser) {
-                return res
-                    .status(201)
-                    .json({
-                        status: 'Success!'
-                    });
-            } else {
-                throw new Error("User cannot be created!");
+            if (!req.files) {
+                return res.send("No file upload");
             }
+
+            var file = req.files.image
+
+            if (file.mimetype == "image/jpeg" || file.mimetype == "image/png") {
+                var imageName = file.name
+                var uuidname = uuid.v1();
+                var imgsrc = 'http://127.0.0.1:8080/images/' + uuidname + imageName;
+
+                const hashedPassword = await bcrypt.hash(password, 12);
+                const newUser = await User.create({
+                    id: '',
+                    name: name,
+                    email: email,
+                    password: hashedPassword,
+                    category: category,
+                    role: role,
+                    address: address,
+                    mobile: mobile,
+                    image: imgsrc
+                });
+
+                file.mv('public/images/' + uuidname + imageName)
+
+                if (newUser) {
+                    return res
+                        .status(201)
+                        .json({
+                            status: 'Success!'
+                        });
+                } else {
+                    throw new Error("User cannot be created!");
+                }
+
+
+            } else {
+                return res.json({
+                    error:"File Format not supported"
+                });
+            }
+
         }
     } catch (err) {
 
-        logger.log("error", `userController.js | restaurantSignup | ${err}`);
+        logger.log("error", `user.js | restaurantSignup | ${err}`);
 
         return res.status(400).json({
             status: err.message
@@ -148,22 +174,32 @@ exports.login = async (req, res, next) => {
                 const userObj = {
                     id: user[0].id,
                     category: user[0].category,
-                    role: user[0].role
+                    role: user[0].role,
+                    name: user[0].name,
+                    add: user[0].address,
+                    mobile: user[0].mobile
                 }
 
-                return res.json({ token, user:userObj });
+                return res.json({ token, user: userObj });
 
             } else {
                 throw new Error('Invalid Credentials!');
             }
         }
     } catch (err) {
-        logger.log("error", `userController.js | login | ${err}`);
+        logger.log("error", `user.js | login | ${err}`);
         return res.status(400).json({
             status: err.message
         });
     }
 }
+
+exports.signout = (req, res) => {
+    res.clearCookie("token");
+    res.json({
+      message: "User signout successfully"
+    });
+};
 
 //protected routes
 exports.isSignedIn = expressJwt({
