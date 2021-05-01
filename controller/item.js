@@ -1,7 +1,7 @@
 const Items = require("../model/items");
 const logger = require("../utils/logger");
 const uuid = require("uuid");
-
+require('dotenv').config();
 exports.addItem = async (req, res) => {
 
     try {
@@ -18,7 +18,7 @@ exports.addItem = async (req, res) => {
             if (file.mimetype == "image/jpeg" || file.mimetype == "image/png") {
                 var imageName = file.name
                 var uuidname = uuid.v1();
-                var imgsrc = 'http://127.0.0.1:8080/images/' + uuidname + imageName;
+                var imgsrc = `${process.env.DOMAIN}/images/` + uuidname + imageName;
 
                 Items.create({
                     id: '',

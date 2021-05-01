@@ -107,7 +107,7 @@ exports.restaurantSignup = async (req, res, next) => {
             if (file.mimetype == "image/jpeg" || file.mimetype == "image/png") {
                 var imageName = file.name
                 var uuidname = uuid.v1();
-                var imgsrc = 'http://127.0.0.1:8080/images/' + uuidname + imageName;
+                var imgsrc = `${process.env.DOMAIN}/images/` + uuidname + imageName;
 
                 const hashedPassword = await bcrypt.hash(password, 12);
                 const newUser = await User.create({
